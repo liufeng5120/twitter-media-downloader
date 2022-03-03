@@ -1,11 +1,12 @@
 '''
 Author: mengzonefire
 Date: 2021-09-21 09:19:02
-LastEditTime: 2022-03-03 02:17:39
+LastEditTime: 2022-03-03 13:31:27
 LastEditors: mengzonefire
 Description: 推主推文批量爬取任务类
 '''
 from task.baseTask import Task
+from common.logger import write_log
 from common.tools import parseData
 from common.text import *
 from common.const import *
@@ -17,7 +18,7 @@ class UserMediaTask(Task):
     def __init__(self, userName, userId):
         self.userName = userName
         self.userId = userId
-        self.savePath = '{}/{}'.format(getContext('dl_path'), userName)
+        self.savePath = os.path.join(getContext('dl_path'), userName)
 
     def getDataList(self, cursor=''):
         cursorPar = cursor and '"cursor":"{}",'.format(cursor)
@@ -32,7 +33,7 @@ class UserMediaTask(Task):
 
         pageContent = response.text
         # debug
-        # print(pageContent)
+        write_log(self.userId, pageContent)
         if 'UserUnavailable' in pageContent:
             print(user_unavailable_warning)
             return
@@ -40,7 +41,7 @@ class UserMediaTask(Task):
         twtIdList = p_twt_id.findall(pageContent)
         if not twtIdList:
             return
-        contentList = pageContent.split('conversation_id_str')
+        contentList = pageContent.split('"entryId":"tweet-')
         contentDict = dict(zip(twtIdList, contentList[1:]))
         for twtId in contentDict:
             picList, gifList, vidList, textList = parseData(

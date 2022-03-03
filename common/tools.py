@@ -1,7 +1,7 @@
 '''
 Author: mengzonefire
 Date: 2021-09-21 09:20:04
-LastEditTime: 2022-03-03 02:32:52
+LastEditTime: 2022-03-03 12:51:34
 LastEditors: mengzonefire
 Description: 工具模块
 '''
@@ -171,7 +171,7 @@ def getUserId(userName: str):
 
 def downloadFile(url, fileName, savePath):
     prog_text = '\r正在下载: {}'.format(fileName) + ' ...{}'
-    filePath = '{}/{}'.format(savePath, fileName)
+    filePath = os.path.join(savePath, fileName)
     if not os.path.exists(savePath):
         os.makedirs(savePath)
     if os.path.exists(filePath):
@@ -203,7 +203,7 @@ def downloadFile(url, fileName, savePath):
 
 
 def saveText(content, fileName, savePath):
-    filePath = '{}/{}'.format(savePath, fileName)
+    filePath = os.path.join(savePath, fileName)
     if not os.path.exists(savePath):
         os.makedirs(savePath)
     if os.path.exists(filePath):

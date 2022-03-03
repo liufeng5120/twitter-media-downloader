@@ -3,7 +3,7 @@ import os
 import configparser
 import requests
 
-version = '1.2.2'
+version = '1.2.3'
 
 # const
 twtCount = 100  # 推主媒体批量爬取时, 每次api抓取的推文计数
@@ -49,14 +49,14 @@ checkUpdateApi = 'https://api.github.com/repos/mengzonefire/twitter-media-downlo
 # api parameter
 twtApiPar = {'include_entities': 'false',
              'include_user_entities': 'false', 'tweet_mode': 'extended'}
-userMediaApiPar = '{{"userId":"{}","count":{},{}"withTweetQuoteCount":false,"includePromotedContent":false,"withSuperFollowsUserFields":false,"withUserResults":false,"withBirdwatchPivots":false,"withReactionsMetadata":false,"withReactionsPerspective":false,"withSuperFollowsTweetFields":false,"withClientEventToken":false,"withBirdwatchNotes":false,"withVoice":false}}'
+userMediaApiPar = '{{"userId":"{}","count":{},{}"withTweetQuoteCount":false,"includePromotedContent":false,"withSuperFollowsUserFields":true,"withUserResults":false,"withBirdwatchPivots":false,"withReactionsMetadata":false,"withReactionsPerspective":false,"withSuperFollowsTweetFields":true,"withClientEventToken":false,"withBirdwatchNotes":false,"withVoice":false}}'
 userInfoApiPar = '{{"screen_name":"{}","withHighlightedLabel":false}}'
 
 # re pattern
 p_csrf_token = re.compile(r'ct0=(.+?)(?:;|$)')
 p_proxy = re.compile(r'.+?:(\d+)$')
 p_user_id = re.compile(r'"rest_id":"(\d+)"')
-p_twt_id = re.compile(r'conversation_id_str":"(\d+)')
+p_twt_id = re.compile(r'"entryId":"tweet-(\d+)')
 p_user_link = re.compile(r'https://twitter.com/([^/]+?)(?:/media)?$')
 p_twt_link = re.compile(r'https://twitter.com/(.+?)/status/(\d+)')
 p_pic_link = re.compile(r'''(https://pbs.twimg.com/media/(.+?))['"]''')
