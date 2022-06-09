@@ -27,6 +27,7 @@ def getHttpText(httpCode):
 def initalArgs():
     # prog argument
     parser = argparse.ArgumentParser(formatter_class=RawTextHelpFormatter)
+    parser.add_argument('-f', '--following', dest='following', type=str,help='读取到指定用户的following列表进行批量下载')
     parser.add_argument('-c', '--cookie', dest='cookie', type=str,
                         help='set cookie to access locked users or tweets, input " " to clear')
     parser.add_argument('-p', '--proxy', dest='proxy', type=str,
@@ -177,7 +178,6 @@ def getUserId(userName: str):
         print(user_warning)
         write_log(userName, page_content)
         return None
-
 
 def downloadFile(url, fileName, savePath):
     prog_text = '\r正在下载: {}'.format(fileName) + ' ...{}'

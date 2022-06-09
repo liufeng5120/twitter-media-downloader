@@ -10,7 +10,7 @@ import os
 from common.const import *
 from common.text import *
 from common.tools import *
-from common.console import cmdMode, startCrawl
+from common.console import cmdMode, startCrawl,followHandler
 from common.exceptHandler import except_handler
 
 
@@ -26,6 +26,11 @@ def main():
         checkUpdate()
         getHeader()
         cmdMode()
+    # 命令行参数有-f不为空 -> 执行程序
+    elif len(sys.argv) == 3 and sys.argv[1] == '-f':
+        getProxy()
+        getHeader()
+        followHandler(sys.argv[2])
     else:
         argsHandler()
         getProxy()

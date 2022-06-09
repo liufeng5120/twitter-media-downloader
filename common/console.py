@@ -61,6 +61,38 @@ def urlHandler(url: str):
         SinglePageTask(userName, twtId).start()
         return
 
+def followHandler(url: str):
+    # userHomePage
+    user_link = p_user_link.findall(url)
+    if user_link:
+        userName = user_link[0]
+        userId = getUserId(userName)
+        if userId:
+            # 用户关注列表
+            getUserFollowing(userId)
+        return
+
+
+# 获取用户关注列表用户ID
+def getUserFollowing(id: str):
+    response = getContext('globalSession').get(
+            userFollowersApi, params={'variables': userFollowersApiPar.format(id, 99), 'features': userFollowersApiPar2}, proxies=getContext(
+                'proxy'), headers=getContext('headers'))
+    if response.status_code != 200:
+        print(http_warning.format('FollowingTask.getDataList',
+            response.status_code, getHttpText(response.status_code)))
+        return 
+    pageContent = response.text
+    # 匹配出用户ID和用户名
+    userNameList = p_user_name.findall(pageContent)
+    userIdList = p_user_id.findall(pageContent)
+    # 遍历用户ID列表index，开始UserMediaTask
+    for index in range(len(userIdList)):
+        userName = userNameList[index]
+        userId = userIdList[index]
+        print('\n开始: {}({})'.format(userName, userId))
+        UserMediaTask(userName, userId).start()
+
 
 def cmdCommand(command):
     if command == 'exit':
