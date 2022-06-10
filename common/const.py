@@ -60,7 +60,7 @@ userInfoApiPar = '{{"screen_name":"{}","withHighlightedLabel":false}}'
 # re pattern
 p_csrf_token = re.compile(r'ct0=(.+?)(?:;|$)')
 pProxy = re.compile(r'.+?:(\d+)$')
-p_user_id = re.compile(r'"rest_id":"(\d+)"')
+p_user_id = re.compile(r',"rest_id":"(\d+)"')
 p_user_name = re.compile(r'"screen_name":"(\w+)"')
 p_twt_id = re.compile(r'conversation_id_str":"(\d+)')
 p_user_link = re.compile(r'https://twitter.com/([^/]+?)(?:/media)?$')
