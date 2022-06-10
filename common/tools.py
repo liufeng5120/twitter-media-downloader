@@ -28,6 +28,7 @@ def initalArgs():
     # prog argument
     parser = argparse.ArgumentParser(formatter_class=RawTextHelpFormatter)
     parser.add_argument('-f', '--following', dest='following', type=str,help='读取到指定用户的following列表进行批量下载')
+    parser.add_argument('-m', '--mode', dest='mode', type=str, help='下载模式默认下载全部, 可选: media, text, video, pic, gif')
     parser.add_argument('-c', '--cookie', dest='cookie', type=str,
                         help='set cookie to access locked users or tweets, input " " to clear')
     parser.add_argument('-p', '--proxy', dest='proxy', type=str,

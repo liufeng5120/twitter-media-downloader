@@ -26,11 +26,11 @@ def main():
         checkUpdate()
         getHeader()
         cmdMode()
-    # 命令行参数有-f不为空 -> 执行程序
-    elif len(sys.argv) == 3 and sys.argv[1] == '-f':
+    # 判断存在参数-f -> 从关注者列表中批量下载
+    elif getContext('args').following:
         getProxy()
         getHeader()
-        followHandler(sys.argv[2])
+        followHandler(getContext('args').following)   
     else:
         argsHandler()
         getProxy()
