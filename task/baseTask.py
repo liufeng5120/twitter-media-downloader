@@ -41,7 +41,7 @@ class Task(object):
             elif getContext('args').mode == 'text':
                 taskList = []    
             elif getContext('args').mode == 'media':
-                taskList = ['picList', 'gifList', 'vidList']
+                taskList = ['picList','vidList']
             else:
                 taskList = ['picList', 'gifList', 'vidList']
 
